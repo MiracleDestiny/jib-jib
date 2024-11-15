@@ -19,11 +19,11 @@ model User {
   password           String               @db.VarChar(72)
   email              String               @unique @db.VarChar(255)
   verified           Boolean
-  userRole           String               @db.VarChar(20)
+  userRole           UserRoleEnum
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   profile            Profile?
-  name               String?
+  name               String               @db.VarChar(50)
   posts              Post[]
   followedBy         Follow[]             @relation("followedBy")
   following          Follow[]             @relation("following")
@@ -35,9 +35,8 @@ model User {
 model Profile {
   id          Int      @id @default(autoincrement())
   userID      Int      @unique
-  name        String   @db.VarChar(50)
   bio         String?  @db.VarChar(100)
-  location    String   @db.VarChar(100)
+  location    String?  @db.VarChar(100)
   dateOfBirth DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -124,7 +123,7 @@ model Post_Image {
 
 model Hashtag {
   id           Int            @id() @default(autoincrement())
-  hashtag      String         @db.VarChar(50)
+  hashtag      String         @unique @db.VarChar(50)
   createdAt    DateTime       @default(now())
   postHashtags Post_Hashtag[]
 }
@@ -137,4 +136,9 @@ model Post_Hashtag {
   createdAt DateTime @default(now())
 
   @@id([postID, hashtagID])
+}
+
+enum UserRoleEnum {
+  USER
+  ADMIN
 }
