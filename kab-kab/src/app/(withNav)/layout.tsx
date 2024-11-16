@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Jua } from "next/font/google";
+import SideNavLeft from "@/components/public/SideNavLeft";
+import SideNavRight from "@/components/public/SideNavRight";
 
 const jua = Jua({
   subsets: ["latin"],
@@ -19,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jua.className}  antialiased`}>{children}</body>
+      <body className={`${jua.className}  antialiased`}>
+        <div className="flex flex-row w-screen h-screen">
+          <SideNavLeft />
+          {children}
+          <SideNavRight />
+        </div>
+      </body>
     </html>
   );
 }

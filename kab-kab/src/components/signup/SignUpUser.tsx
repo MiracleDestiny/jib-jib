@@ -24,12 +24,14 @@ export default function SignUpUser({ formData, handleChange, handleClick }: Sign
       <Input
         placeholder="Password"
         name="password"
+        type="password"
         value={formData.password}
         onChange={handleChange}
       />
       <Input
         placeholder="Confirm Password"
         name="cpassword"
+        type="password"
         value={formData.cpassword}
         onChange={handleChange}
       />

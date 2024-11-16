@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import SignUpProfile from "@/components/signup/SignUpProfile";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import SignUpUser from "@/components/signup/SignUpUser";
+import UserApi from "@/backend/service/user";
+import { postUserZodType } from "@/backend/types/user";
 
 export default function SignUpPage() {
   const params = useSearchParams();
@@ -34,9 +36,21 @@ export default function SignUpPage() {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     alert(`Name: ${formData.username}, Email: ${formData.email}, Password: ${formData.password}`);
+    const body = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      name: formData.name,
+      profile: {
+        dateOfBirth: new Date(),
+        bio: formData.bio,
+        location: formData.location,
+      },
+    } as postUserZodType;
+    const createUser = await UserApi.createUser(body);
   };
 
   const handleNext = (event: React.FormEvent<HTMLButtonElement>) => {
@@ -45,7 +59,7 @@ export default function SignUpPage() {
     alert(`Name: ${formData.username}, Email: ${formData.email}, Password: ${formData.password}`);
   };
   return (
-    <div className="bg-white h-full w-screen pt-8 px-48">
+    <div className="bg-white h-screen w-screen pt-8 px-48">
       {step === "user" ? (
         <div className="text-black flex flex-row justify-center text-[48px] my-8">
           <div>Create your account</div>
@@ -64,15 +78,6 @@ export default function SignUpPage() {
             <SignUpProfile formData={formData} handleChange={handleChange} />
           )}
         </form>
-        <Link className="text-primary-yellow text-xl self-center" href={""}>
-          Forgot Password?
-        </Link>
-      </div>
-      <div className="text-primary-gray flex flex-row text-md my-8">
-        <div className="mr-2">Don't have an account</div>
-        <Link href={"/signup"} className="text-primary-yellow">
-          Sign up
-        </Link>
       </div>
     </div>
   );

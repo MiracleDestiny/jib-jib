@@ -1,3 +1,33 @@
+import { RiHomeSmile2Line } from "react-icons/ri";
+
+export const NAV_LEFT = [
+  {
+    name: "Home",
+    href: "/home",
+    icon: RiHomeSmile2Line,
+  },
+  {
+    name: "Search",
+    href: "/search",
+    icon: RiHomeSmile2Line,
+  },
+  {
+    name: "Profile",
+    href: "/profile",
+    icon: RiHomeSmile2Line,
+  },
+  {
+    name: "Bookmark",
+    href: "/bookmark",
+    icon: RiHomeSmile2Line,
+  },
+  {
+    name: "More",
+    href: "/more",
+    icon: RiHomeSmile2Line,
+  },
+];
+
 export const MONTH_MAP = [
   { key: "January", value: "1" },
   { key: "February", value: "2" },
