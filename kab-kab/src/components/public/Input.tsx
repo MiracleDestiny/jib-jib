@@ -1,20 +1,25 @@
 "use client";
 
-import { FormEventHandler } from "react";
+import React, { FormEventHandler, useState } from "react";
+
 interface InputProps {
   placeholder?: string;
-  handleInput?: FormEventHandler<HTMLInputElement>;
+  name?: string;
+  onChange?: FormEventHandler<HTMLInputElement>;
+  value?: string;
 }
-function Input({ placeholder, handleInput }: InputProps) {
+
+function Input({ placeholder = "", name = "", onChange, value }: InputProps) {
   return (
     <div className="border-primary-lightgray border-2 rounded-xl p-4">
       <input
-        onInput={() => {
-          console.log("Handling");
-        }}
+        type="text"
         className="text-primary-gray w-full focus:outline-none placeholder:opacity-50"
-        placeholder={placeholder ?? ""}
-      ></input>
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   );
 }
