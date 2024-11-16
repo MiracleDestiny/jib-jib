@@ -25,6 +25,8 @@ export default function SignUpPage() {
     password: "",
     cpassword: "",
     name: "",
+    bio: "",
+    location: "",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
