@@ -13,3 +13,14 @@ export const postUserZod = z.object({
     dateOfBirth: z.date(),
   }),
 });
+
+export const userZod = z
+  .object({
+    username: z.string(),
+    password: z.string(),
+    email: z.string(),
+    name: z.string(),
+  })
+  .partial();
+
+export type userZodType = z.infer<typeof userZod>;

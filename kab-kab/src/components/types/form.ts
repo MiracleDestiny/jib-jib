@@ -6,4 +6,7 @@ export interface SignUpFormData {
   name: string;
   bio: string;
   location: string;
+  day: string;
+  month: string;
+  year: string;
 }

@@ -26,10 +26,21 @@ model User {
   name               String               @db.VarChar(50)
   posts              Post[]
   followedBy         Follow[]             @relation("followedBy")
-  following          Follow[]             @relation("following")
-  likedPosts         User_Like_Post[]     @relation("likedBy")
+following          Follow[]             @relation("following")
+    likedPosts         User_Like_Post[]     @relation("likedBy")
   repostedPosts      User_Repost_Post[]   @relation("repostedBy")
   User_BookmarK_Post User_BookmarK_Post[] @relation("bookmarkedBy")
+  sessions           Session[]
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime 
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Profile {

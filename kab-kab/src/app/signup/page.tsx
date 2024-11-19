@@ -1,8 +1,7 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import SignUpProfile from "@/components/signup/SignUpProfile";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { redirect, usePathname, useRouter, useSearchParams } from "next/navigation";
 import SignUpUser from "@/components/signup/SignUpUser";
 import UserApi from "@/backend/service/user";
 import { postUserZodType } from "@/backend/types/user";
@@ -29,11 +28,15 @@ export default function SignUpPage() {
     name: "",
     bio: "",
     location: "",
+    month: "",
+    day: "",
+    year: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    console.log(formData);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -45,12 +48,18 @@ export default function SignUpPage() {
       password: formData.password,
       name: formData.name,
       profile: {
-        dateOfBirth: new Date(),
+        dateOfBirth: new Date(`${formData.year}-${formData.month}-${formData.day}`),
         bio: formData.bio,
         location: formData.location,
       },
     } as postUserZodType;
+    console.log(`${formData.year}-${formData.month}-${formData.day}`);
     const createUser = await UserApi.createUser(body);
+    if (createUser) {
+      router.replace("/signin");
+    } else {
+      alert("An error has occurred!");
+    }
   };
 
   const handleNext = (event: React.FormEvent<HTMLButtonElement>) => {

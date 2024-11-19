@@ -7,7 +7,7 @@ import { DAY_MAP, MONTH_MAP, YEAR_MAP } from "@/utils/constants";
 
 interface SignUpUserProps {
   formData: SignUpFormData;
-  handleChange: React.FormEventHandler<HTMLInputElement>;
+  handleChange: React.FormEventHandler<HTMLInputElement | HTMLSelectElement>;
   handleClick: React.FormEventHandler<HTMLButtonElement>;
 }
 
@@ -38,9 +38,25 @@ export default function SignUpUser({ formData, handleChange, handleClick }: Sign
       <div className="text-black flex flex-col text-xl my-8">
         <div>Date of Birth</div>
         <div className="flex flex-row justify-between text-sm">
-          <Select options={MONTH_MAP} name="month"></Select>
-          <Select options={DAY_MAP} name="day"></Select>
-          <Select options={YEAR_MAP} name="year"></Select>
+          <Select
+            options={DAY_MAP}
+            name="day"
+            value={formData.day}
+            onChange={handleChange}
+          ></Select>
+          <Select
+            options={MONTH_MAP}
+            name="month"
+            value={formData.month}
+            onChange={handleChange}
+          ></Select>
+
+          <Select
+            options={YEAR_MAP}
+            name="year"
+            value={formData.year}
+            onChange={handleChange}
+          ></Select>
         </div>
       </div>
       <Button onClick={handleClick}>Next</Button>

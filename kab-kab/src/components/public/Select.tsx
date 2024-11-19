@@ -1,11 +1,12 @@
 "use client";
 
 import { FormEventHandler } from "react";
-interface InputProps {
+interface SelectProps {
   placeholder?: string;
   name?: string;
-  handleInput?: FormEventHandler<HTMLInputElement>;
+  onChange?: FormEventHandler<HTMLSelectElement>;
   options: SelectOption[];
+  value?: string;
 }
 
 type SelectOption = {
@@ -13,15 +14,14 @@ type SelectOption = {
   value: string;
 };
 
-export default function Select({ placeholder, handleInput, options, name }: InputProps) {
+export default function Select({ placeholder, onChange, options, name, value }: SelectProps) {
   return (
     <div className="border-primary-lightgray border-2 rounded-xl p-4">
       <select
-        onInput={() => {
-          console.log("Handling");
-        }}
+        onChange={onChange}
         className="text-primary-gray w-full focus:outline-none placeholder:opacity-50"
         name={name ?? ""}
+        value={value ?? ""}
       >
         {options.map((option) => (
           <option key={option.key} value={option.value}>

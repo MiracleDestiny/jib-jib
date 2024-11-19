@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 interface SignUpProfileProps {
   formData: SignUpFormData;
-  handleChange: React.FormEventHandler<HTMLInputElement>;
+  handleChange: React.FormEventHandler<HTMLInputElement | HTMLSelectElement>;
 }
 
 function SignUpProfile({ formData, handleChange }: SignUpProfileProps) {

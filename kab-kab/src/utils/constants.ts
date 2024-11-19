@@ -52,3 +52,21 @@ export const YEAR_MAP = Array.from({ length: 26 }, (_, i) => ({
   key: `${2000 + i}`,
   value: `${2000 + i}`,
 }));
+
+export const POSTS = [
+  {
+    name: "tent",
+    username: "username",
+    imageURL: "/orca.png",
+    content: "Something #Woke #Rad",
+    bookmarked: false,
+    replies: 138,
+    reposts: 420,
+    likes: 273,
+    replied: true,
+    liked: true,
+    reposted: true,
+  },
+];
+
+export const POST_OPTIONS = [{}];

@@ -9,6 +9,8 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as postUserZodType;
     const hashedPassword = await hashPassword(body.password);
+    console.log("Body");
+    console.log(body);
     const user = await prisma.user.create({
       data: {
         username: body.username,

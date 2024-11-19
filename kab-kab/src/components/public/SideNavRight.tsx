@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
-function SideNavRight() {
-  return (
-    <div>SideNavRight</div>
-  )
+export default function SideNavRight() {
+  return <div className="bg-white w-[400px] h-full"></div>;
 }
-
-export default SideNavRight
