@@ -13,7 +13,7 @@ interface PostProps {
   replied: boolean;
   reposted: boolean;
   liked: boolean;
-  onBookmark: MouseEventHandler<HTMLButtonElement>; 
+  onBookmark: MouseEventHandler<HTMLButtonElement>;
   onReply: MouseEventHandler<HTMLButtonElement>;
   onRepost: MouseEventHandler<HTMLButtonElement>;
   onLike: MouseEventHandler<HTMLButtonElement>;
@@ -53,7 +53,7 @@ export default function Post({
         <PostContent text={content}></PostContent>
       </div>
       <span className="mt-auto justify-between">
-        {bookmarked ? <IoBookmark onClick = {() => }/> : <IoBookmarkOutline />}
+        {bookmarked ? <IoBookmark onClick={() => {}} /> : <IoBookmarkOutline />}
       </span>
       <span className="flex flex-row"></span>
     </div>

@@ -3,25 +3,17 @@ import Post from "../public/Post";
 import { POSTS } from "@/utils/constants";
 
 export default function Home() {
-  const handleBookmark = () => {
+  const handleBookmark = () => {};
 
-  }
+  const handleLike = () => {};
 
-  const handleLike = () => {
-    
-  }
+  const handleReply = () => {};
 
-  const handleReply = () => {
-    
-  }
-
-  const handleRepost = () => {
-    
-  }
+  const handleRepost = () => {};
   return (
     <div className="px-4 pt-2">
       <div></div>
-      <div>
+      {/* <div>
         {POSTS.map((post, index) => (
           <Post
             key={`${post}-${index}`}
@@ -42,7 +34,7 @@ export default function Home() {
             onRepost={handleRepost}            
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
