@@ -1,22 +1,20 @@
-import React, { FormEventHandler } from "react";
-interface InputProps {
+import React, { ChangeEventHandler, FormEventHandler } from "react";
+interface TextAreaProps {
   placeholder?: string;
   name?: string;
-  onChange?: FormEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   value?: string;
-  type?: string;
 }
 
-function TextArea() {
+function TextArea({ placeholder, name, onChange, value }: TextAreaProps) {
   return (
     <div className="border-primary-lightgray border-2 rounded-xl p-4">
       <textarea
-      // type={type ?? "text"}
-      // className="text-primary-gray w-full focus:outline-none placeholder:opacity-50"
-      // placeholder={placeholder}
-      // name={name}
-      // value={value}
-      // onChange={onChange}
+        className="text-primary-gray w-full focus:outline-none placeholder:opacity-50"
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );

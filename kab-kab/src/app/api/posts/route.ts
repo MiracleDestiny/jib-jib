@@ -18,6 +18,11 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as postPostZodType;
     const hashtags = extractHashtags(body.content);
+    // const hashtagIds = await prisma.hashtag.findMany({
+    //   where : {
+    //     hashtag :
+    //   }
+    // })
     const user = await prisma.user.update({
       where: {
         id: body.authorID,
@@ -27,6 +32,9 @@ export async function POST(req: NextRequest) {
           create: {
             content: body.content,
             parentPostID: body.parentPostID ?? null,
+            Post_Analytic: {
+              create: {},
+            },
           },
         },
       },

@@ -1,6 +1,10 @@
 import { RiHomeSmile2Line } from "react-icons/ri";
+import { FiSearch } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
+import { FaRegBookmark } from "react-icons/fa6";
+import { CgMoreO } from "react-icons/cg";
 
-export const NAV_LEFT = [
+export const NAV_LEFT_OPTIONS = [
   {
     name: "Home",
     href: "/home",
@@ -9,22 +13,22 @@ export const NAV_LEFT = [
   {
     name: "Search",
     href: "/search",
-    icon: RiHomeSmile2Line,
+    icon: FiSearch,
   },
   {
     name: "Profile",
     href: "/profile",
-    icon: RiHomeSmile2Line,
+    icon: CgProfile,
   },
   {
     name: "Bookmark",
     href: "/bookmark",
-    icon: RiHomeSmile2Line,
+    icon: FaRegBookmark,
   },
   {
     name: "More",
     href: "/more",
-    icon: RiHomeSmile2Line,
+    icon: CgMoreO,
   },
 ];
 

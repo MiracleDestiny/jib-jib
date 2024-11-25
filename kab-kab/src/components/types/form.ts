@@ -9,4 +9,5 @@ export interface SignUpFormData {
   day: string;
   month: string;
   year: string;
+  imageURL: string;
 }

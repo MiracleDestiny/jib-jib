@@ -1,27 +1,41 @@
 "use client";
-import { NAV_LEFT } from "@/utils/constants";
+import { NAV_LEFT_OPTIONS } from "@/utils/constants";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Button from "./Button";
 import PostInputDialog from "./PostInputDialog";
+import { sessionZodType } from "@/backend/types/session";
+import { userZodType } from "@/backend/types/user";
+import PostApi from "@/backend/service/post";
+import { postPostZodType } from "@/backend/types/post";
+import Profile from "./Profile";
 
-export default function SideNavLeft() {
+interface SideNavLeftProps {
+  session: (sessionZodType & { user: userZodType }) | null;
+}
+
+export default function SideNavLeft({ session }: SideNavLeftProps) {
   const [posting, setPosting] = useState(false);
-  const handlePost = () => {
+  const handlePostClick = () => {
     setPosting(true);
   };
 
   const handleClose = () => {
     setPosting(false);
   };
-  const pathname = usePathname();
-  console.log(pathname);
+
   return (
-    <div className="bg-white w-[400px] h-full">
-      <div className="px-4">
-        <div className="text-primary-black text-3xl w-full flex-col justify-center p-4 h-full">
-          {NAV_LEFT.map((nav) => (
+    <div className="bg-white min-w-[350px] h-full flex flex-col items-center fixed  border border-gray-300">
+      <div className="px-8 pt-16">
+        {session && (
+          <Profile
+            username={session?.user.username ?? ""}
+            name={session?.user.name ?? ""}
+            imageURL={session?.user.imageURL ?? ""}
+          />
+        )}
+        <div className="text-primary-black text-3xl w-full flex-col justify-center">
+          {NAV_LEFT_OPTIONS.map((nav) => (
             <Link
               key={`link-${nav.name}`}
               href={nav.href}
@@ -32,10 +46,10 @@ export default function SideNavLeft() {
             </Link>
           ))}
         </div>
-        <Button className="text-primary-black" onClick={handlePost}>
+        <Button className="text-primary-black" onClick={handlePostClick}>
           Post
         </Button>
-        {posting && <PostInputDialog onClose={handleClose} />}
+        {posting && <PostInputDialog onClose={handleClose} session={session} />}
       </div>
     </div>
   );

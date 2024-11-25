@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { userZodType } from "./user";
 
 export const sessionZod = z
   .object({
@@ -11,3 +12,6 @@ export const sessionZod = z
   .partial();
 
 export type sessionZodType = z.infer<typeof sessionZod>;
+
+// export type Session = (sessionZodType && typeof {user: userZodType}) || null ;
+export type Session = (sessionZodType & { user: userZodType }) | null;

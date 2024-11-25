@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
             dateOfBirth: body.profile.dateOfBirth,
           },
         },
+        imageURL: body.imageURL,
       },
     });
 

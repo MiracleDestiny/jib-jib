@@ -10,9 +10,9 @@ interface ButtonProps {
 function Button({ children, onClick, type, className }: ButtonProps) {
   return (
     <button
-      className={`flex w-full bg-primary-yellow rounded-[32px] p-4 justify-center  text-xl ${
+      className={`${
         className ?? ""
-      }`}
+      } flex w-full bg-primary-yellow rounded-[32px] p-4 justify-center text-xl ${className ?? ""}`}
       onClick={onClick}
       type={type ?? "button"}
     >

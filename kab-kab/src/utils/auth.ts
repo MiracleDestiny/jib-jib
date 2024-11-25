@@ -4,7 +4,6 @@ import { SALT_ROUNDS } from "@/backend/config/auth";
 import { randomBytes } from "crypto";
 import { cookies } from "next/headers";
 export async function authenticateLogin(usernameemail: string, inputPassword: string) {
-  const hashedInput = await bcrypt.hash(inputPassword, SALT_ROUNDS);
   // Load hash from your password DB.
   let user = await prisma.user.findFirst({
     where: {
@@ -37,6 +36,7 @@ export async function authenticateLogin(usernameemail: string, inputPassword: st
     console.log("created session!");
     const cookie = cookies();
     cookie.set("sessionToken", session.sessionToken, { path: "/" });
+    console.log("cookie : ", cookie.getAll());
     console.log({ user, session });
     return { user, session };
   }
@@ -106,11 +106,23 @@ export async function getServerSession() {
           userRole: true,
           username: true,
           email: true,
+          name: true,
+          imageURL: true,
         },
       },
     },
   });
+
   if (!session) return null;
+  if (new Date(session.expires) < new Date()) {
+    const deleteSession = await prisma.session.delete({
+      where: {
+        sessionToken: sessionToken,
+      },
+    });
+    console.log(deleteSession);
+    console.log("Deleted session due to expired");
+  }
   console.log(session);
   return new Date(session.expires) < new Date() ? null : session;
 }

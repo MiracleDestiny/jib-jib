@@ -1,3 +1,5 @@
+import { ShownPost } from "@/components/public/Post";
+
 export function extractHashtags(text: string): string[] {
   // Regular expression to match hashtags
   const hashtagRegex = /#(\w+)/g;
@@ -10,4 +12,8 @@ export function extractHashtags(text: string): string[] {
   }
 
   return matches;
+}
+
+export function formatPostToShownPost(): ShownPost {
+  return {} as ShownPost;
 }

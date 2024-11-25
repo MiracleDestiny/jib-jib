@@ -1,40 +1,29 @@
 import React from "react";
-import Post from "../public/Post";
-import { POSTS } from "@/utils/constants";
+import { ShownPost } from "../public/Post";
+import { sessionZodType } from "@/backend/types/session";
+import { userZodType } from "@/backend/types/user";
+import Posts from "./Posts";
+import HomeTab from "./HomeTab";
 
-export default function Home() {
-  const handleBookmark = () => {};
+interface HomeProps {
+  session: (sessionZodType & { user: userZodType }) | null;
+  posts: ShownPost[] | null;
+  following:
+    | {
+        createdAt: Date;
+        followedID: number;
+        followerID: number;
+      }[]
+    | null;
+}
 
-  const handleLike = () => {};
-
-  const handleReply = () => {};
-
-  const handleRepost = () => {};
+export default function Home({ session, posts, following }: HomeProps) {
+  const followedPosts =
+    posts?.filter((post) => following?.map((value) => value.followedID).includes(post.authorId)) ??
+    null;
   return (
-    <div className="px-4 pt-2">
-      <div></div>
-      {/* <div>
-        {POSTS.map((post, index) => (
-          <Post
-            key={`${post}-${index}`}
-            name={post.name}
-            username={post.username}
-            imageURL={post.imageURL}
-            content={post.content}
-            bookmarked={post.bookmarked}
-            replies={post.replies}
-            reposts={post.reposts}
-            likes={post.likes}
-            replied={post.replied}
-            liked={post.liked}
-            reposted={post.reposted}
-            onBookmark={handleBookmark}
-            onLike={handleLike}
-            onReply={handleReply}
-            onRepost={handleRepost}            
-          />
-        ))}
-      </div> */}
+    <div className="flex flex-col items-center px-4 pt-2 h-full">
+      <HomeTab posts={posts} session={session} followedPosts={followedPosts} />
     </div>
   );
 }

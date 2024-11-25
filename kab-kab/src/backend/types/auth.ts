@@ -1,4 +1,3 @@
-import { Session, User } from "@prisma/client";
 import { z } from "zod";
 import { userZodType } from "./user";
 import { sessionZodType } from "./session";

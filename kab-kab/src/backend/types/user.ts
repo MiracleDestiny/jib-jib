@@ -7,6 +7,7 @@ export const postUserZod = z.object({
   password: z.string(),
   email: z.string(),
   name: z.string(),
+  imageURL: z.string(),
   profile: z.object({
     bio: z.string().optional(),
     location: z.string().optional(),
@@ -20,7 +21,14 @@ export const userZod = z
     password: z.string(),
     email: z.string(),
     name: z.string(),
+    imageURL: z.string(),
   })
   .partial();
 
+export const postFollowUserZod = z.object({
+  followedID: z.number(),
+  followerID: z.number(),
+});
+
 export type userZodType = z.infer<typeof userZod>;
+export type postFollowUserZodType = z.infer<typeof postFollowUserZod>;

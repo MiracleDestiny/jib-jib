@@ -8,6 +8,7 @@ export default class AuthApi {
       const res = await fetch(`${this.BASE_URL}/signin`, {
         method: "POST",
         body: JSON.stringify(body),
+        credentials: "include",
       });
       const result = (await res.json()) as postAuthSignInZodResult;
       console.log(result);
