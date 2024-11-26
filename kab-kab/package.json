@@ -1,28 +1,51 @@
 {
-  "name": "jib-jib",
-  "version": "0.1.0",
+  "name": "kab-kab",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db": "docker-compose up -d"
   },
   "dependencies": {
-    "@prisma/client": "^5.21.1",
+    "@edgestore/react": "^0.2.2",
+    "@edgestore/server": "^0.2.2",
+    "@prisma/client": "^5.22.0",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "bcrypt": "^5.1.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.0.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.460.0",
     "next": "14.2.15",
+    "postgres": "^3.4.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-dropzone": "^14.3.5",
+    "react-icons": "^5.3.0",
+    "react-swipeable": "^7.0.2",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/bcrypt": "^5.0.2",
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20.17.6",
+    "@types/pg": "^8.11.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "postcss": "^8",
-    "prisma": "^5.21.1",
+    "prisma": "^5.22.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
   }
 }
