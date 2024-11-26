@@ -9,6 +9,7 @@ import { userZodType } from "@/backend/types/user";
 import PostApi from "@/backend/service/post";
 import { postPostZodType } from "@/backend/types/post";
 import Profile from "./Profile";
+import { PostDialog } from "./PostDialog";
 
 interface SideNavLeftProps {
   session: (sessionZodType & { user: userZodType }) | null;
@@ -25,7 +26,7 @@ export default function SideNavLeft({ session }: SideNavLeftProps) {
   };
 
   return (
-    <div className="bg-white min-w-[350px] h-full flex flex-col items-center fixed  border border-gray-300">
+    <div className=" left-0 top-0 -4 overflow-y-auto bg-white min-w-[350px]  h-screen  flex flex-col items-center fixed  border border-gray-300">
       <div className="px-8 pt-16">
         {session && (
           <Profile
@@ -46,9 +47,8 @@ export default function SideNavLeft({ session }: SideNavLeftProps) {
             </Link>
           ))}
         </div>
-        <Button className="text-primary-black" onClick={handlePostClick}>
-          Post
-        </Button>
+
+        <PostDialog session={session} />
         {posting && <PostInputDialog onClose={handleClose} session={session} />}
       </div>
     </div>

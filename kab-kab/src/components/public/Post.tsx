@@ -30,6 +30,9 @@ export interface ShownPost {
   likes: number;
   postId: number;
   postDate: Date;
+  reposterUsername?: string;
+  replyingTo?: string;
+  parentPostId?: number;
 }
 
 export default function Post({
@@ -48,6 +51,7 @@ export default function Post({
   likes,
   postDate,
   session,
+  reposterUsername,
 }: PostProps) {
   const authorProfilePath = `/profile/${authorId}`;
   const postDateString = timeAgo(postDate);
@@ -60,6 +64,9 @@ export default function Post({
         router.push(`/posts/${postId}`);
       }}
     >
+      {reposterUsername && (
+        <div className="text-primary-lightgray">{`Repsoted by ${reposterUsername}`}</div>
+      )}
       <div className="flex flex-row space-x-4 mb-2">
         <div className="rounded-full border border-black border-5 flex justify-center items-center min-w-16 min-h-16">
           <Link href={authorProfilePath}>
@@ -100,8 +107,18 @@ export default function Post({
             <GoComment />
             <span>{replies}</span>
           </span> */}
-          <ReplyButton postID={postId} session={session} />
-          <RepostButton postID={postId} userID={session?.userId ?? -1} initialReposts={reposts} />
+          <ReplyButton
+            postID={postId}
+            session={session}
+            initialReplies={replies}
+            initialReplied={replied}
+          />
+          <RepostButton
+            postID={postId}
+            userID={session?.userId ?? -1}
+            initialReposts={reposts}
+            initialReposted={reposted}
+          />
           <LikeButton
             postID={postId}
             userID={session?.userId ?? -1}

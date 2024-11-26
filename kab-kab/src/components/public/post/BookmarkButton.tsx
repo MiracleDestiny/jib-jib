@@ -2,7 +2,7 @@
 
 import PostApi from "@/backend/service/post";
 import { postPostBookmarkZodType } from "@/backend/types/post";
-import React, { useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 
 interface BookmarkButtonProps {
@@ -18,7 +18,8 @@ export default function BookmarkButton({
 }: BookmarkButtonProps) {
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
 
-  const handleBookmark = async () => {
+  const handleBookmark = async (e: MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
     const newBookmarkedState = !bookmarked;
     setBookmarked(newBookmarkedState);
 
@@ -31,7 +32,10 @@ export default function BookmarkButton({
   };
 
   return (
-    <span onClick={handleBookmark} className="cursor-pointer">
+    <span
+      onClick={handleBookmark}
+      className="cursor-pointer hover:bg-primary-lightgray rounded-2xl p-2"
+    >
       {bookmarked ? <IoBookmark className="text-primary-yellow" /> : <IoBookmarkOutline />}
     </span>
   );

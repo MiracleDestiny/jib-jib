@@ -3,8 +3,6 @@ import { getServerSession } from "@/utils/auth";
 import React from "react";
 import { getAllFollowing, getAllPosts } from "../action";
 import { redirect } from "next/navigation";
-import SideNavLeft from "@/components/public/SideNavLeft";
-import SideNavRight from "@/components/public/SideNavRight";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +14,7 @@ export default async function HomePage() {
   console.log("posts:", posts);
   const following = await getAllFollowing(session.userId, session);
   return (
-    <div className="w-full px-4 bg-white min-h-screen h-full">
+    <div className=" w-full px-4 bg-white min-h-screen h-full">
       <Home session={session} posts={posts} following={following} />
     </div>
   );

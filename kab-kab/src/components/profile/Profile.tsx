@@ -19,9 +19,13 @@ function Profile({
   isUser,
   initialFollowing,
   userID,
+  followerCount,
+  followingCount,
+  imageURL,
+  bannerImageURL
 }: ProfileProps) {
   return (
-    <div className=" flex flex-col justify-center px-4 pt-2 h-full w-[700px]">
+    <div className=" flex flex-col justify-center px-4 pt-2 h-full w-[700px] text-primary-black">
       <ProfileHeader
         name={name}
         username={username}
@@ -33,6 +37,10 @@ function Profile({
         initialFollowing={initialFollowing}
         session={session}
         userID={userID}
+        followerCount={followerCount}
+        followingCount={followingCount}
+        imageURL={imageURL}
+        bannerImageURL={bannerImageURL}
       />
 
       {/* Tabs */}

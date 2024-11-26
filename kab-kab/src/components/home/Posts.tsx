@@ -10,7 +10,7 @@ export interface PostsProps {
 
 function Posts({ posts, session }: PostsProps) {
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="relative flex flex-col space-y-2">
       {posts?.map((post, index) => (
         <Post
           session={session}

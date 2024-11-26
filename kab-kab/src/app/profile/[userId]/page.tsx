@@ -1,6 +1,12 @@
 import Profile from "@/components/profile/Profile";
 import React from "react";
-import { getAllPostsByUser, getProfile, isFollowing } from "../../action";
+import {
+  getAllFollower,
+  getAllFollowing,
+  getAllPostsByUser,
+  getProfile,
+  isFollowing,
+} from "../../action";
 import { redirect } from "next/navigation";
 import { getServerSession } from "@/utils/auth";
 
@@ -14,6 +20,8 @@ export default async function ProfilePage({ params }: { params: { userId: number
   if (session.userId == userID) redirect("/profile");
   const userPosts = await getAllPostsByUser(userID);
   const following = await isFollowing(session.userId, userID, session);
+  const followings = await getAllFollowing(userID, session);
+  const followers = await getAllFollower(userID, session);
   return (
     <div className="w-full px-4 bg-white min-h-screen h-full flex justify-center">
       {
@@ -29,6 +37,10 @@ export default async function ProfilePage({ params }: { params: { userId: number
           isUser={false}
           initialFollowing={following}
           userID={userID}
+          followerCount={followers?.length ?? 0}
+          followingCount={followings?.length ?? 0}
+          imageURL={""}
+          bannerImageURL=""
         />
       }
     </div>

@@ -3,6 +3,7 @@ import { z } from "zod";
 export type postPostZodType = z.infer<typeof postPostZod>;
 export type postPostLikeZodType = z.infer<typeof postLikeZod>;
 export type postPostBookmarkZodType = z.infer<typeof postBookmarkZod>;
+export type postPostRepostZodType = z.infer<typeof postRepostZod>;
 export type postZodType = z.infer<typeof postZod>;
 
 export const postPostZod = z.object({
@@ -40,4 +41,9 @@ export const postLikeZod = z.object({
 export const postBookmarkZod = z.object({
   userID: z.number(),
   bookmark: z.boolean(),
+});
+
+export const postRepostZod = z.object({
+  userID: z.number(),
+  repost: z.boolean(),
 });

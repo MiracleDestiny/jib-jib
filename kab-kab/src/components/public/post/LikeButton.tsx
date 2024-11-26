@@ -2,7 +2,7 @@
 
 import PostApi from "@/backend/service/post";
 import { postPostLikeZodType } from "@/backend/types/post";
-import React, { useState } from "react";
+import React, { MouseEvent,useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 interface LikeButtonProps {
@@ -21,7 +21,8 @@ export default function LikeButton({
   const [liked, setLiked] = useState(initialLiked);
   const [likes, setLikes] = useState(initialLikes);
 
-  const handleLike = async () => {
+  const handleLike = async (e: MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
     const newLikedState = !liked;
     setLiked(newLikedState);
     setLikes((prev) => (newLikedState ? prev + 1 : prev - 1));
@@ -36,7 +37,10 @@ export default function LikeButton({
   };
 
   return (
-    <span className="flex flex-row space-x-2 items-center cursor-pointer" onClick={handleLike}>
+    <span
+      className="flex flex-row space-x-2 items-center cursor-pointer hover:bg-primary-lightgray rounded-xl p-1 px-2"
+      onClick={handleLike}
+    >
       {liked ? <IoHeart className="text-red-500" /> : <IoHeartOutline />}
       <span>{likes}</span>
     </span>

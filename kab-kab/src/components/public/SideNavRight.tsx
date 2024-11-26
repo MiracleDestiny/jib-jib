@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchBar } from "./SearchBar";
 
 export default function SideNavRight() {
   const trends = [
@@ -10,7 +11,7 @@ export default function SideNavRight() {
   ];
 
   return (
-    <div className="bg-white w-[350px] p-4  border border-gray-300 fixed right-0 h-full">
+    <div className="bg-white w-[350px] p-4  border border-gray-300  fixed right-0 top-0 h-screen overflow-y-auto z-10">
       {/* Search Input */}
       <div className="mb-6">
         <input
@@ -19,6 +20,7 @@ export default function SideNavRight() {
           className="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
       </div>
+      <SearchBar />
 
       {/* Title */}
       <h2 className="text-center text-xl font-semibold text-primary-black mb-6">Trends for you</h2>

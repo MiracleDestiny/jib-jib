@@ -36,23 +36,13 @@ export default function TabComponent({ posts, session, followedPosts }: HomeTabP
       </div>
 
       {/* Tab Content */}
-      <div {...handlers} className="mt-4 overflow-hidden">
+      <div {...handlers} className="mt-4 overflow-hidden z-20">
         <div
           className="flex transition-transform duration-300"
           style={{ transform: `translateX(-${activeTab * 100}%)` }}
         >
           <Posts posts={posts} session={session} />
-
-          {/* Tab 1 Content
-          <div className="w-full flex-shrink-0">
-            <p className="text-primary-black">Content for Your Page</p>
-          </div> */}
           <Posts posts={followedPosts} session={session} />
-
-          {/* Tab 2 Content */}
-          {/* <div className="w-full flex-shrink-0">
-            <p className="text-primary-black">Content for Following</p>
-          </div> */}
         </div>
       </div>
     </div>

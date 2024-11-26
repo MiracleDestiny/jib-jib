@@ -3,7 +3,7 @@ export function timeAgo(date: Date) {
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   if (diffInSeconds < 60) {
-    return `${diffInSeconds} sec${diffInSeconds !== 1 ? "s" : ""} ago`;
+    return `Just a moment ago`;
   }
 
   const diffInMinutes = Math.floor(diffInSeconds / 60);

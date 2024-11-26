@@ -81,6 +81,11 @@ export async function unBookmarkPost(userId: number, postId: number) {
 export async function getAllPosts(session: Session) {
   if (session) {
     const posts = await prisma.post.findMany({
+      where: {
+        NOT: {
+          authorID: session.userId,
+        },
+      },
       include: {
         User_Like_Post: {
           where: {
@@ -111,6 +116,7 @@ export async function getAllPosts(session: Session) {
         createdAt: "desc",
       },
     });
+
     const formattedPosts = posts.map((post) => {
       return {
         authorName: post.author.name,
@@ -129,6 +135,7 @@ export async function getAllPosts(session: Session) {
         imageURL: post.author.imageURL,
       };
     });
+
     return formattedPosts as ShownPost[];
   }
   return null;
@@ -300,6 +307,9 @@ export async function getPostThread(parentPostID: number, session: Session) {
         },
         Post_Analytic: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     const formattedPosts = posts.map((post) => {
       return {
@@ -351,4 +361,54 @@ export async function isFollowing(
     return following != null;
   }
   return false;
+}
+
+export async function getAllFollower(userID: number, session: Session) {
+  if (session) {
+    const followers = await prisma.follow.findMany({
+      where: {
+        followedID: userID,
+      },
+    });
+    return followers;
+  }
+  return null;
+}
+
+export async function getRecommendedUsers(session: Session) {
+  if (session) {
+    const users = await prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            NOT: {
+              id: session.userId,
+            },
+          },
+          {
+            NOT: {
+              followedBy: {
+                none: {
+                  followerID: session.userId, // Ensure the user is not already followed by the current user
+                },
+              },
+            },
+          },
+        ],
+      },
+      select: {
+        username: true,
+        name: true,
+        imageURL: true,
+        profile: {
+          select: {
+            bio: true,
+          },
+        },
+      },
+    });
+    console.log(users)
+    return users;
+  }
+  return null;
 }

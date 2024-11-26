@@ -20,7 +20,13 @@ export default function SignUpUser({ formData, handleChange, handleClick }: Sign
         value={formData.username}
         onChange={handleChange}
       />
-      <Input placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
+      <Input
+        placeholder="Email"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
       <Input
         placeholder="Password"
         name="password"

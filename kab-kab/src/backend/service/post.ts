@@ -1,4 +1,9 @@
-import { postPostBookmarkZodType, postPostLikeZodType, postPostZodType } from "../types/post";
+import {
+  postPostBookmarkZodType,
+  postPostLikeZodType,
+  postPostRepostZodType,
+  postPostZodType,
+} from "../types/post";
 export default class PostApi {
   static BASE_URL = "/api/posts";
   static async createPost(body: postPostZodType) {
@@ -60,6 +65,20 @@ export default class PostApi {
     try {
       console.log(postID);
       const res = await fetch(`${this.BASE_URL}/${postID}/bookmark`, {
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+      const json = await res.json();
+      console.log(json);
+      return json.data;
+    } catch (error) {
+      return error;
+    }
+  }
+  static async repostPost(postID: number, body: postPostRepostZodType) {
+    try {
+      console.log(postID);
+      const res = await fetch(`${this.BASE_URL}/${postID}/repost`, {
         method: "POST",
         body: JSON.stringify(body),
       });

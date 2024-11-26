@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { FaCalendarAlt, FaImage, FaMapMarkerAlt, FaRegGrinAlt } from "react-icons/fa";
 import Button from "./Button";
 import Image from "next/image";
-interface PostInputProps {
+export interface PostInputProps {
   session: (sessionZodType & userZodType) | null;
   parentPostID?: number;
 }
