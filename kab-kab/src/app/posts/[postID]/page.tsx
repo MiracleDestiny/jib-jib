@@ -3,6 +3,8 @@ import { getServerSession } from "@/utils/auth";
 import React from "react";
 import { getPost, getPostThread } from "../../action";
 import { redirect } from "next/navigation";
+import SideNavLeft from "@/components/public/SideNavLeft";
+import SideNavRight from "@/components/public/SideNavRight";
 
 export default async function PostPage({ params }: { params: { postID: number } }) {
   const session = await getServerSession();
@@ -12,8 +14,12 @@ export default async function PostPage({ params }: { params: { postID: number } 
   if (!post) redirect("/home");
   const postThreads = await getPostThread(postID, session);
   return (
-    <div className="flex justify-center w-full bg-white h-full">
-      <PostThread session={session} post={post} posts={postThreads} />
-    </div>
+    <>
+      <SideNavLeft session={session} route={"home"} />
+      <div className="flex justify-center w-full bg-white h-full">
+        <PostThread session={session} post={post} posts={postThreads} />
+      </div>
+      <SideNavRight />
+    </>
   );
 }

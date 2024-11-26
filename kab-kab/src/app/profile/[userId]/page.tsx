@@ -9,6 +9,8 @@ import {
 } from "../../action";
 import { redirect } from "next/navigation";
 import { getServerSession } from "@/utils/auth";
+import SideNavLeft from "@/components/public/SideNavLeft";
+import SideNavRight from "@/components/public/SideNavRight";
 
 export default async function ProfilePage({ params }: { params: { userId: number } }) {
   const session = await getServerSession();
@@ -23,26 +25,30 @@ export default async function ProfilePage({ params }: { params: { userId: number
   const followings = await getAllFollowing(userID, session);
   const followers = await getAllFollower(userID, session);
   return (
-    <div className="w-full px-4 bg-white min-h-screen h-full flex justify-center">
-      {
-        <Profile
-          name={profile.name}
-          username={profile.username}
-          bio={profile.bio ?? ""}
-          location={profile.location ?? ""}
-          dateOfBirth={profile.dateOfBirth}
-          joinedAt={profile.createdAt}
-          posts={userPosts ?? []}
-          session={session}
-          isUser={false}
-          initialFollowing={following}
-          userID={userID}
-          followerCount={followers?.length ?? 0}
-          followingCount={followings?.length ?? 0}
-          imageURL={""}
-          bannerImageURL=""
-        />
-      }
-    </div>
+    <>
+      <SideNavLeft session={session} route={""} />
+      <div className="w-full px-4 bg-white  h-full ">
+        {
+          <Profile
+            name={profile.name}
+            username={profile.username}
+            bio={profile.bio ?? ""}
+            location={profile.location ?? ""}
+            dateOfBirth={profile.dateOfBirth}
+            joinedAt={profile.createdAt}
+            posts={userPosts ?? []}
+            session={session}
+            isUser={false}
+            initialFollowing={following}
+            userID={userID}
+            followerCount={followers?.length ?? 0}
+            followingCount={followings?.length ?? 0}
+            imageURL={""}
+            bannerImageURL=""
+          />
+        }
+      </div>
+      <SideNavRight />
+    </>
   );
 }

@@ -13,9 +13,10 @@ import { PostDialog } from "./PostDialog";
 
 interface SideNavLeftProps {
   session: (sessionZodType & { user: userZodType }) | null;
+  route: string;
 }
 
-export default function SideNavLeft({ session }: SideNavLeftProps) {
+export default function SideNavLeft({ session, route }: SideNavLeftProps) {
   const [posting, setPosting] = useState(false);
   const handlePostClick = () => {
     setPosting(true);
@@ -40,7 +41,9 @@ export default function SideNavLeft({ session }: SideNavLeftProps) {
             <Link
               key={`link-${nav.name}`}
               href={nav.href}
-              className="flex flex-row space-x-2 items-center p-4"
+              className={`flex flex-row space-x-2 items-center p-4 ${
+                route === nav.name.toLowerCase() ? "text-primary-yellow" : ""
+              }`}
             >
               <nav.icon />
               <span>{nav.name}</span>

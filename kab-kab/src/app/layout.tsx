@@ -26,9 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${jua.className}  antialiased bg-white`}>
         <div className="flex ">
-          <SideNavLeft session={session} />
           <div className="flex-1 ml-1/5 mr-1/5 p-8 bg-white">{children}</div>
-          <SideNavRight />
         </div>
       </body>
     </html>

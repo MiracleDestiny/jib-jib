@@ -32,10 +32,18 @@ export default function SignInPage() {
     } as postAuthSignInZodType;
 
     try {
-      const data = await AuthApi.signIn(body).then((data) => {
-        console.log("result", data);
-        router.push("/home");
-      });
+      const data = await AuthApi.signIn(body)
+        .then((data) => {
+          if (data === undefined) {
+            setErrorMessage("Invalid username or password");
+            return;
+          }
+          console.log("result", data);
+          router.push("/home");
+        })
+        .catch((error) => {
+          console.error("error", error);
+        });
       // Check if session token is set
     } catch (error) {
       console.error(error);
@@ -50,7 +58,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="bg-white h-screen w-screen pt-8 flex justify-center">
+    <main className="bg-white pt-8 flex justify-center">
       <div className="w-[550px]">
         <div className="text-black flex flex-row justify-center text-[48px] my-8">
           <div className="mr-4">Sign in to</div>
@@ -64,7 +72,7 @@ export default function SignInPage() {
               onChange={handleChange}
             />
             <Input placeholder="Password" name="password" type="password" onChange={handleChange} />
-            {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+            {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
             <Button type="submit">Sign In</Button>
           </form>
           <Link className="text-primary-yellow text-xl self-center" href="/forgot-password">
@@ -78,6 +86,6 @@ export default function SignInPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

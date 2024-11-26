@@ -73,7 +73,7 @@ export default function SignUpPage() {
 
   return (
     <EdgeStoreProvider>
-      <div className="bg-white h-screen w-screen pt-8 px-48 flex justify-center">
+      <main className="bg-white  pt-8 px-48 flex justify-center">
         <div className="w-[550px]">
           {step === "user" ? (
             <div className="text-black flex flex-row justify-center text-[48px] my-8">
@@ -99,7 +99,7 @@ export default function SignUpPage() {
             </form>
           </div>
         </div>
-      </div>
+      </main>
     </EdgeStoreProvider>
   );
 }

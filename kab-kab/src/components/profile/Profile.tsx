@@ -22,10 +22,10 @@ function Profile({
   followerCount,
   followingCount,
   imageURL,
-  bannerImageURL
+  bannerImageURL,
 }: ProfileProps) {
   return (
-    <div className=" flex flex-col justify-center px-4 pt-2 h-full w-[700px] text-primary-black">
+    <div className=" flex flex-col px-4 pt-2 h-full w-[700px] text-primary-black">
       <ProfileHeader
         name={name}
         username={username}

@@ -195,6 +195,9 @@ export async function getAllPostsByUser(userId: number) {
         },
         Post_Analytic: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     const formattedPosts = posts.map((post) => {
       return {
@@ -407,8 +410,73 @@ export async function getRecommendedUsers(session: Session) {
         },
       },
     });
-    console.log(users)
+    console.log(users);
     return users;
+  }
+  return null;
+}
+
+export async function getSessionUserBookmarkedPosts(session: Session) {
+  if (session) {
+    const bookmarkedPosts = await prisma.user.findFirst({
+      where: {
+        id: session.userId,
+      },
+      select: {
+        User_BookmarK_Post: {
+          select: {
+            bookmarkedPost: {
+              include: {
+                User_Like_Post: {
+                  where: {
+                    userID: session?.userId,
+                  },
+                },
+                User_BookmarK_Post: {
+                  where: {
+                    userID: session?.userId,
+                  },
+                },
+                User_Repost_Post: {
+                  where: {
+                    userID: session?.userId,
+                  },
+                },
+                author: {
+                  select: {
+                    name: true,
+                    username: true,
+                    id: true,
+                    imageURL: true,
+                  },
+                },
+                Post_Analytic: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const formattedPosts = bookmarkedPosts?.User_BookmarK_Post?.flatMap((post) => {
+      return {
+        authorName: post.bookmarkedPost.author.name,
+        authorUsername: post.bookmarkedPost.author.username,
+        content: post.bookmarkedPost.content ?? "",
+        bookmarked: post.bookmarkedPost.User_BookmarK_Post.length > 0,
+        liked: post.bookmarkedPost.User_Like_Post.length > 0,
+        reposted: post.bookmarkedPost.User_Repost_Post.length > 0,
+        replied: false,
+        likes: post.bookmarkedPost.Post_Analytic?.likes,
+        reposts: post.bookmarkedPost.Post_Analytic?.reposts,
+        replies: post.bookmarkedPost.Post_Analytic?.replies,
+        imageURL: post.bookmarkedPost.author.imageURL,
+        postId: post.bookmarkedPost.id,
+        authorId: post.bookmarkedPost.author.id,
+        postDate: post.bookmarkedPost.createdAt,
+      };
+    });
+    return formattedPosts as ShownPost[];
   }
   return null;
 }

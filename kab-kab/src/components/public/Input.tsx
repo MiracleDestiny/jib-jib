@@ -1,11 +1,11 @@
 "use client";
 
-import React, { FormEventHandler, useState } from "react";
+import React, { ChangeEventHandler, FormEventHandler, useState } from "react";
 
 interface InputProps {
   placeholder?: string;
   name?: string;
-  onChange?: FormEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   value?: string;
   type?: string;
 }

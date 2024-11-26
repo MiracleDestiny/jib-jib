@@ -7,6 +7,7 @@ import { Session } from "@/backend/types/session";
 import Image from "next/image";
 import Button from "../public/Button";
 import UserApi from "@/backend/service/user";
+import { EditProfileDialog } from "./EditProfileDialog";
 
 export interface ProfileHeaderProps {
   name: string;
@@ -92,9 +93,13 @@ function ProfileHeader({
             <p className="text-gray-500">{`@${username}`}</p>
           </div>
           {isUser ? (
-            <Button className="max-w-fit  text-sm " onClick={handleEdit}>
-              Edit
-            </Button>
+            <EditProfileDialog
+              session={session}
+              initialName={name}
+              initialLocation={location}
+              initialBirthDate={dateOfBirth}
+              initialBio={bio} 
+            />
           ) : (
             <Button
               className={`text-sm max-w-fit h-auto ${
